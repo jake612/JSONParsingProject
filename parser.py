@@ -26,6 +26,11 @@ def extractAttributes(dictObj):
     newDict['time_zone'] = dictObj.get('user').get('time_zone')
     return newDict
 
+def createPlot(xAxis, yAxis):
+    plt.scatter(xAxis, yAxis)
+    plt.title('xAxis vs yAxis')
+    plt.show()
+
 
 # opening a file to string fo
 filename = input("Enter a file name to parse\n")
@@ -34,9 +39,18 @@ fo = open(filename, "r")
 # create a dictionary from JSON file
 jsonDict = parseByLine(fo)
 fo.close()
+print("Data successfully loaded")
+while True:
+    userInput = input("Type analyze to plot values or exit to end program\n")
+    if userInput == "exit":
+        break
+    elif userInput == "analyze":
+        xInp = input("Enter an attribute for the x axis: ")
+        yInp = input("Enter an attribute for the y axis: ")
+        xAxis = []
+        yAxis = []
+        for i in jsonDict:
+            xAxis.append(i.get(xInp))
+            yAxis.append(i.get(yInp))
+        createPlot(xAxis, yAxis)
 
-i = 0
-while i < 100:
-    print(jsonDict.pop(i)['friends_count'])
-
-    i += 1
