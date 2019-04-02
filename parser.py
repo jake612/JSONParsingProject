@@ -1,5 +1,7 @@
 import json
 import matplotlib.pyplot as plt
+import StatTools as stats
+
 # Takes in a file object and returns a list containing a dictionary for each JSON
 def parseByLine(fileObj):
     jsonDict = []
@@ -41,7 +43,7 @@ jsonDict = parseByLine(fo)
 fo.close()
 print("Data successfully loaded")
 while True:
-    userInput = input("Type analyze to plot values or exit to end program\n")
+    userInput = input("Type analyze to plot values, values for dictionary vals or exit to end program\n")
     if userInput == "exit":
         break
     elif userInput == "analyze":
@@ -53,4 +55,10 @@ while True:
             xAxis.append(i.get(xInp))
             yAxis.append(i.get(yInp))
         createPlot(xAxis, yAxis)
+        print(stats.dictCorrelationCoeff(jsonDict, xInp, yInp))
+
+    elif userInput == "values":
+        for x in jsonDict[0].keys():
+            print(x)
+
 
