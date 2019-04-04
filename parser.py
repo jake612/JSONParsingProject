@@ -56,6 +56,7 @@ while True:
             yAxis.append(i.get(yInp))
         createPlot(xAxis, yAxis)
         print(stats.dictCorrelationCoeff(jsonDict, xInp, yInp))
+        print(stats.dictSLR(jsonDict, xInp, yInp))
 
     elif userInput == "values":
         for x in jsonDict[0].keys():
